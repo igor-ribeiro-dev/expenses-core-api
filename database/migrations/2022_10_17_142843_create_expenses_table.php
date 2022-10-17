@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('expiration');
             $table->boolean('recurrent');
             $table->foreignId('created_by')->references('id')->on('users');
+            $table->foreignId('budget_id')->references('id')->on('budgets');
             $table->timestamps();
         });
     }
