@@ -31,7 +31,7 @@ class CreateUserService {
 
             $user->markEmailAsVerified();
 
-            $token = $user->createToken('default');
+            $token = $user->createToken('default', ['basic']);
 
             DB::commit();
 
