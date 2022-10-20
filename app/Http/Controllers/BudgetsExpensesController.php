@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Budget;
 use App\Models\Expenses;
 use App\Rules\BelongsToUser;
-use App\Services\Internal\Budgets\ShowBudgetsService;
+use App\Services\Internal\Expenses\DestroyExpenseService;
 use App\Services\Internal\Expenses\ListExpensesService;
 use App\Services\Internal\Expenses\ShowExpenseService;
 use App\Services\Internal\Expenses\StoreExpensesParam;
@@ -117,10 +116,21 @@ class BudgetsExpensesController extends Controller {
      * @param int $id
      * @return Response
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $budget, $expense, DestroyExpenseService $service) {
 
+        $request->merge(compact('budget', 'expense'));
 
-        return response()->noContent(201);
+        $this->validate($request, [
+            'expense' => [
+                'exists:expenses,id',
+                $this->getExpenseBelongsToBudgetValidation($budget),
+                new BelongsToUser('expenses')
+            ]
+        ]);
+
+        $service->run($expense);
+
+        return response()->noContent(204);
     }
 
     /**
@@ -130,15 +140,19 @@ class BudgetsExpensesController extends Controller {
      */
     protected function getExpenseBelongsToBudgetValidation($budgetId): Closure {
         return function(string $attribute, $value, callable $fail) use ($budgetId) {
-            $belongs = Expenses::query()
-                ->whereKey($value)
-                ->where('budget_id', $budgetId)
-                ->exists();
+            $belongs = $this->doesExpenseBelongsToBudget($budgetId, $value);
 
             if( ! $belongs) {
                 $fail('The '.$attribute.' does not belongs to given budget');
             }
         };
+    }
+
+    protected function doesExpenseBelongsToBudget($budgetId, $expenseId): bool {
+        return Expenses::query()
+            ->whereKey($expenseId)
+            ->where('budget_id', $budgetId)
+            ->exists();
     }
 
 }
