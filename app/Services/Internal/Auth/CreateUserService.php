@@ -26,7 +26,7 @@ class CreateUserService {
                 'name' => $createUserParam->getName(),
                 'last_name' => $createUserParam->getLastName(),
                 'email' => $createUserParam->getEmail(),
-                'password' => $createUserParam->getPassword(),
+                'password' => bcrypt($createUserParam->getPassword()),
             ]);
 
             $user->markEmailAsVerified();
