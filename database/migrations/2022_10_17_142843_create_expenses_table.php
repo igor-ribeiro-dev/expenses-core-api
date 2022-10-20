@@ -18,9 +18,9 @@ return new class extends Migration
             $table->id();
             $table->string('description', 200);
             $table->float('value');
-            $table->string('barcode_slip', 50);
+            $table->string('barcode_slip', 50)->nullable();
             $table->date('expiration');
-            $table->boolean('recurrent');
+            $table->boolean('recurrent')->default(0);
             $table->foreignId('created_by')->references('id')->on('users');
             $table->foreignId('budget_id')->references('id')->on('budgets');
             $table->timestamps();

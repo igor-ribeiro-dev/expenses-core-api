@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BudgetsController;
+use App\Http\Controllers\BudgetsExpensesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,5 @@ Route::post('register', [\App\Http\Controllers\AuthController::class, 'register'
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('budgets', BudgetsController::class);
+    Route::apiResource('budgets.expenses', BudgetsExpensesController::class);
 });
