@@ -14,14 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('expenses', function (Blueprint $table) {
-            $table->foreignId('billing_provider_id')
+            $table->foreignId('provider_config_id')
                 ->after('budget_id')
                 ->nullable()
                 ->references('id')
-                ->on('billing_providers');
-            $table->json('params_value')
-                ->nullable()
-                ->after('billing_provider_id');
+                ->on('billing_providers_configs');
         });
     }
 
@@ -33,9 +30,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('expenses', function (Blueprint $table) {
-            $table->dropForeign(['billing_provider_id']);
-            $table->dropColumn('billing_provider_id');
-            $table->dropColumn('params_value');
+            $table->dropForeign(['provider_config_id']);
+            $table->dropColumn('provider_config_id');
         });
     }
 };

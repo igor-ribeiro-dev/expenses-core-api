@@ -11,15 +11,22 @@ class Expenses extends Model {
 
     protected $fillable = [
         'description',
-        'value',
-        'barcode_slip',
-        'expiration',
         'recurrent',
         'created_by',
         'budget_id',
+        'provider_config_id',
     ];
+
 
     public function budget() {
         return $this->belongsTo(Budget::class, 'budget_id');
+    }
+
+    public function recurrences() {
+        return $this->hasMany(ExpenseRecurrence::class, 'expense_id');
+    }
+
+    public function provider_config() {
+        return $this->belongsTo(BillingProvidersConfig::class, 'provider_config_id');
     }
 }
