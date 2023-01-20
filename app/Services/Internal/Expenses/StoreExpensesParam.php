@@ -13,6 +13,7 @@ class StoreExpensesParam {
     protected $recurrent;
     protected $created_by;
     protected $budget_id;
+    protected $paid;
 
     /**
      * @return mixed
@@ -128,4 +129,21 @@ class StoreExpensesParam {
         $this->budget_id = $budget_id;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function getPaid(): bool {
+        return $this->paid ?? false;
+    }
+
+    /**
+     * @param mixed $paid
+     * @return StoreExpensesParam
+     */
+    public function setPaid(bool $paid) {
+        $this->paid = $paid;
+        return $this;
+    }
+
 }

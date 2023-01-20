@@ -44,9 +44,9 @@ class BudgetsExpensesController extends Controller {
             'barcode_slip' => ['numeric', 'digits_between:48,49'],
             'expiration' => ['required', 'date_format:d/m/Y'],
             'recurrent' => ['required', 'boolean'],
+            'paid' => ['required', 'boolean'],
             'budget' => new BelongsToUser('budgets')
         ]);
-
 
         $expensesParam
             ->setDescription($request->description)
@@ -55,7 +55,8 @@ class BudgetsExpensesController extends Controller {
             ->setExpiration($request->expiration)
             ->setRecurrent($request->recurrent)
             ->setCreatedBy(auth()->id())
-            ->setBudgetId($budget);
+            ->setBudgetId($budget)
+            ->setPaid(!! $request->paid);
 
         $service->run($expensesParam);
 
