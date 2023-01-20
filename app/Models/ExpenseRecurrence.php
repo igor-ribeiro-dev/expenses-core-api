@@ -20,6 +20,11 @@ class ExpenseRecurrence extends Model {
         'expiration' => 'date'
     ];
 
+    protected $hidden = [
+        'expense_id',
+        'updated_at',
+    ];
+
     public function expense() {
         return $this->belongsTo(Expenses::class, 'expense_id');
     }
