@@ -15,9 +15,6 @@ class UpdateExpenseService {
 
         $dataToUpdate = $this->removeUnchangedValues([
             'description' => $expenseParam->getDescription(),
-            'value' => $expenseParam->getValue(),
-            'barcode_slip' => $expenseParam->getBarcodeSlip(),
-            'expiration' => $expenseParam->getExpiration(true),
             'recurrent' => $expenseParam->getRecurrent(),
         ]);
 
