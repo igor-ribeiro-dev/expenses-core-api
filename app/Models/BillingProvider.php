@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class BillingProvider extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'description',
+        'tag',
+    ];
+
+    protected $casts = [
+        'params' => 'array'
+    ];
 }
