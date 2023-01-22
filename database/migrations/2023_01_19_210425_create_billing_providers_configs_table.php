@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->foreignId('billing_provider_id')
                 ->references('id')
-                ->on('expense_recurrences');
+                ->on('billing_providers');
 
             $table->json('config');
 
