@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BudgetsController;
 use App\Http\Controllers\BudgetsExpensesController;
+use App\Http\Controllers\ExpensesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,5 @@ Route::post('login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('budgets', BudgetsController::class);
     Route::apiResource('budgets.expenses', BudgetsExpensesController::class);
+    Route::apiResource('expenses', ExpensesController::class)->only('index');
 });
