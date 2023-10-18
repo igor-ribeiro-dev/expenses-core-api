@@ -4,7 +4,7 @@ namespace App\Services\Internal\Expenses;
 
 use App\Models\Expenses;
 
-class ListExpensesService {
+class ListBudgetsExpensesService {
     public function run($budgetId, $ownerId = null) {
         $query = Expenses::query()->where('budget_id', $budgetId);
 

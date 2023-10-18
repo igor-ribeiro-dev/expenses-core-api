@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expenses;
 use App\Rules\BelongsToUser;
 use App\Services\Internal\Expenses\DestroyExpenseService;
-use App\Services\Internal\Expenses\ListExpensesService;
+use App\Services\Internal\Expenses\ListBudgetsExpensesService;
 use App\Services\Internal\Expenses\ShowExpenseService;
 use App\Services\Internal\Expenses\StoreExpensesParam;
 use App\Services\Internal\Expenses\StoreExpensesService;
@@ -22,7 +22,7 @@ class BudgetsExpensesController extends Controller {
      *
      * @return Response
      */
-    public function index(int $budget, ListExpensesService $service) {
+    public function index(int $budget, ListBudgetsExpensesService $service) {
         $expenses = $service->run($budget, auth()->user()->isAdmin() ? null : auth()->id());
 
         return response($expenses);
