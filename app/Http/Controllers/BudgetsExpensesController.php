@@ -41,7 +41,7 @@ class BudgetsExpensesController extends Controller {
         $this->validate($request, [
             'description' => ['required', 'min:3'],
             'value' => ['required', 'numeric', 'gte:1'],
-            'barcode_slip' => ['numeric', 'digits_between:48,49'],
+            'barcode_slip' => ['nullable', 'numeric', 'digits_between:48,49'],
             'expiration' => ['required', 'date_format:d/m/Y'],
             'recurrent' => ['required', 'boolean'],
             'paid' => ['required', 'boolean'],
