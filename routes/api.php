@@ -24,4 +24,5 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('budgets', BudgetsController::class);
     Route::apiResource('budgets.expenses', BudgetsExpensesController::class);
     Route::apiResource('expenses', ExpensesController::class)->only('index');
+    Route::post('expenses/{id}/toggle-paid', [ExpensesController::class, 'togglePaid']);
 });

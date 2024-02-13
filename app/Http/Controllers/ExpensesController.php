@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Services\Internal\Expenses\ListExpensesService;
-use Illuminate\Http\Request;
+use App\Services\Internal\Expenses\TogglePaidExpensesService;
+use Illuminate\Http\Response;
 
 class ExpensesController extends Controller
 {
@@ -17,5 +18,12 @@ class ExpensesController extends Controller
         $expenses = $service->run(auth()->user()->isAdmin() ? null : auth()->id());
 
         return response($expenses);
+    }
+
+    protected function togglePaid($expenseId, TogglePaidExpensesService $service): Response
+    {
+        $paid = $service->run($expenseId);
+
+        return response(['paid' => $paid], 200);
     }
 }
