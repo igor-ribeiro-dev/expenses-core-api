@@ -7,6 +7,6 @@ use App\Models\Expenses;
 class ShowExpenseService {
 
     public function run($expenseId) {
-        return Expenses::with('last_recurrence')->find($expenseId);
+        return Expenses::with('last_recurrence', 'budget')->find($expenseId);
     }
 }
