@@ -1,6 +1,6 @@
 services:
     backend.php:
-        image: igorthefox/php-laravel-8-3-9:1.6
+        image: igorthefox/php-laravel-8-3-9:1.7
         ports:
             - '80:80'
         volumes:
