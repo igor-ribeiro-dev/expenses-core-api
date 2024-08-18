@@ -119,4 +119,15 @@ class ExpenseFeederService
 
         return $payload;
     }
+
+    public function testConnection(): bool
+    {
+        try {
+            $this->connect();
+            $this->disconnect();
+            return true;
+        }catch (\Throwable $e) {
+            return false;
+        }
+    }
 }
